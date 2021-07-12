@@ -413,7 +413,8 @@ $tesla->BreakCar();
 */
 
 //2
-
+//I will continue at home
+/*
 $alphabets = array(array(), array());
 $numbers = array();
 
@@ -456,7 +457,7 @@ echo "<form action = 'index.php' method = 'post' style='background-color: #f2f2f
         echo "<option>Թվեր և Տառեր</option>";
     echo "</select>";
     echo "<input type = 'submit' value = 'Գեներացնել' name = 'submit'>";
-echo "</form>";
+echo "</form>";*/
 
 
 

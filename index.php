@@ -5,21 +5,21 @@
 /*
 $color = ['white', 'green', 'red', 'blue', 'black'];
 
-echo "The memory of that scene for me is like a frame of film forever frozen at that moment: the $color[2] carpet, the $color[1] lawn, the $color[0] house, the leaden sky. The new president and his first lady. - Richard M. Nixon";*/
+echo "The memory of that scene for me is like a frame of film forever frozen at that moment: the {$color[2]} carpet, the {$color[1]} lawn, the {$color[0]} house, the leaden sky. The new president and his first lady. - Richard M. Nixon";*/
 
 //2
 /*
 $color = ['white', 'green', 'red'];
 
-echo "$color[1] <br> $color[2] <br> $color[0]";*/
+echo "{$color[1]} <br> {$color[2]} <br> {$color[0]}";*/
 
 //3
 /*
 $ceu = [ "Italy"=>"Rome", "Luxembourg"=>"Luxembourg", "Belgium"=> "Brussels", "Denmark"=>"Copenhagen", "Finland"=>"Helsinki", "France" => "Paris", "Slovakia"=>"Bratislava", "Slovenia"=>"Ljubljana", "Germany" => "Berlin", "Greece" => "Athens", "Ireland"=>"Dublin", "Netherlands"=>"Amsterdam", "Portugal"=>"Lisbon", "Spain"=>"Madrid", "Sweden"=>"Stockholm", "United Kingdom"=>"London", "Cyprus"=>"Nicosia", "Lithuania"=>"Vilnius", "Czech Republic"=>"Prague", "Estonia"=>"Tallin", "Hungary"=>"Budapest", "Latvia"=>"Riga", "Malta"=>"Valetta", "Austria" => "Vienna", "Poland"=>"Warsaw"];
 asort($ceu);
 
-foreach ($ceu as $key => $value) {
-    echo "The capital of {$key} is {$value} <br>";
+foreach ($ceu as $country => $city) {
+    echo "The capital of {$country} is {$city} <br>";
 }*/
 
 //4
@@ -45,11 +45,11 @@ function PrintJsonInString($value,$key)
     echo "$key : $value <br>";
 }
 
-$JSON = '{"Title": "The Cuckoos Calling",
-"Author": "Robert Galbraith",
-"Detail": {
-        "Publisher": "Little Brown"
-}}';
+$JSON = '{  "Title": "The Cuckoos Calling",
+            "Author": "Robert Galbraith",
+            "Detail": {
+               "Publisher": "Little Brown"
+          }}';
 
 $obj = json_decode($JSON, true);
 array_walk_recursive($obj, "PrintJsonInString");*/
@@ -110,9 +110,11 @@ foreach ($arr as $key => $value) {
 
 //9
 /*
-function temp($arr){
+function temp($arr)
+{
     $sum = 0;
-    for($i = 0;$i < count($arr);$i ++){
+    for($i = 0;$i < count($arr);$i ++)
+    {
         $sum += $arr[$i];
     }
 
@@ -141,7 +143,8 @@ temp($temps);*/
 
 //10
 /*
-function columns($uarr) {
+function columns($uarr)
+{
     $n=$uarr;
     if (count($n) == 0)
         return array();
@@ -152,7 +155,8 @@ function columns($uarr) {
     return array_map('array_filter', $transpose);
 }
 
-function bead_sort($uarr) {
+function bead_sort($uarr)
+{
     foreach ($uarr as $e)
         $poles []= array_fill(0, $e, 1);
     return array_map('count', columns(columns($poles)));
@@ -189,29 +193,34 @@ print_r($Color);
 
 //13
 /*
-function up($str){
+function up($str)
+{
     $res = strtoupper($str);
     return $res;
 }
 
-function low($str){
+function low($str)
+{
     $res = strtolower($str);
     return $res;
 }
 
-function firstUp($str){
+function firstUp($str)
+{
     $res = ucfirst($str);
     return $res;
 }
 
-function firstUpAllWords($str){
+function firstUpAllWords($str)
+{
     $res = ucwords($str);
     return $res;
 }*/
 
 //14
 /*
-function stringContain($str, $con){
+function stringContain($str, $con)
+{
     if (strpos($str, $con) !== false)
     {
         return true;
@@ -231,18 +240,21 @@ echo stringContain($str1, 'fox');
 /*
 $path1 = 'www.example.com/public_html/index.php';
 
-function ext($path){
-    $file_name = substr(strrchr($path, "/"), 1);
-    return $file_name;
+function ext($path)
+{
+    //$file_name = substr(strrchr($path, "/"), 1);
+    $file_name = explode( '/', $path );
+    return $file_name[count($file_name) - 1];
 }
 
-ext($path1);*/
+echo ext($path1);*/
 
 //16
 /*
 $mailid1  = 'rayy@example.com';
 
-function extMail($mailid){
+function extMail($mailid)
+{
     $user = strstr($mailid, '@', true);
     return $user;
 }
@@ -251,7 +263,8 @@ extMail($mailid1);*/
 
 //17
 /*
-function lastThreeChar($str){
+function lastThreeChar($str)
+{
     $str = substr($str, - 3);
     return $str;
 }
@@ -260,8 +273,10 @@ echo lastThreeChar('rayy@example.com');*/
 
 //18
 /*
-function replace($str){
-    $str = preg_replace('/the/', 'That', $str, 1);
+function replace($str)
+{
+    $i = 1;
+    $str = str_replace('the', 'That', $str, $i);
     return $str;
 }
 
@@ -271,25 +286,30 @@ echo replace($str);*/
 
 //19
 /*
-function copmare($str1, $str2){
+function copmare($str1, $str2)
+{
     $len = strlen($str1) < strlen($str2) ? strlen($str1) : strlen($str2);
     //echo $len;
 
-    for($i = 0;$i < $len;$i ++){
-        if($str1[$i] != $str2[$i])
+    for($i = 0;$i < $len;$i ++)
+    {
+        if($str1[$i] != $str2[$i]) {
+            echo "{$str1[$i]} vs {$str2[$i]}";
             return $i;
+        }
     }
 }
 
 echo copmare('football','footboll');*/
 
 //20
-
-function remCom($str){
+/*
+function remCom($str)
+{
     $str = str_replace( ',', '', $str);
     return $str;
 }
 
 $a = "2,543.12";
 
-echo remCom($a);
+echo remCom($a);*/

@@ -313,3 +313,171 @@ function remCom($str)
 $a = "2,543.12";
 
 echo remCom($a);*/
+
+//////////////////////////////////////////////////
+/// ////////////////////////////////////////////////
+/// ///////////////////////////////////////////////
+//1
+/*
+$arr = array();
+for($i = 0;$i < 25;$i ++)
+{
+    array_push($arr, rand(1, 100));
+}
+
+//print_r($arr);
+echo "<br>";
+
+$arr = array_unique($arr);
+rsort($arr);
+
+//print_r($arr);
+
+echo "<table border = '2' width='200px' style = 'border-collapse: collapse; text-align: center' >";
+
+for($i = 0;$i < count($arr);$i ++)
+{
+    $num = $i + 1;
+    echo "<tr><td>{$num}</td><td>{$arr[$i]}</td></tr>";
+}
+
+echo "</table>";
+*/
+//3
+/*
+abstract class Car
+{
+    public $model;
+    public $color;
+    public $year;
+    public $box;
+    public $engine;
+    public $maxspeed;
+
+    public function __construct($model, $color, $year, $box, $engine, $maxspeed)
+    {
+        $this->model = $model;
+        $this->color = $color;
+        $this->year = $year;
+        $this->box = $box;
+        $this->engine = $engine;
+        $this->maxspeed = $maxspeed;
+    }
+
+    public function Info()
+    {
+        echo "Model: {$this->model} <br> Color: {$this->color} <br> Year: {$this->year} <br> Box: {$this->box} <br> Engine: {$this->engine} <br> Max Speed: {$this->maxspeed} <br>";
+    }
+
+    abstract public function Start();
+    abstract public function BreakCar();
+}
+
+class BMW extends Car
+{
+    public function Start()
+    {
+        echo "Please unlock the key <br>";
+    }
+
+    public function BreakCar()
+    {
+        echo "Press breaks clamp <br>";
+    }
+}
+
+class Tesla extends Car
+{
+    public function Start()
+    {
+        echo "Please press the key <br>";
+    }
+
+    public function BreakCar()
+    {
+        echo "Press break key <br>";
+    }
+}
+
+$bmw = new BMW("E50", "Black", "2021", "Automat", "5.7L", 240);
+
+$bmw->Info();
+$bmw->Start();
+$bmw->BreakCar();
+
+$tesla = new Tesla("Tesla20", "Blue", "2020", "Automat", "1.2L", 220);
+
+$tesla->Info();
+$tesla->Start();
+$tesla->BreakCar();
+*/
+
+//2
+
+$alphabets = array(array(), array());
+$numbers = array();
+
+for($i = 0;$i < 10;$i ++)
+    array_push($numbers, $i);
+
+for($i = 'a' , $j = 'A';$i < 'z';$i ++, $j ++)
+{
+    array_push($alphabets[0], $i);
+    array_push($alphabets[1], $j);
+}
+
+array_push($alphabets[0], 'z');
+array_push($alphabets[1], 'Z');
+
+function check()
+{
+    $len = (int) $_POST['data'];
+    return $len;
+}
+
+function generate(){
+    $res = "";
+    for($i = 0;$i < check();$i ++){
+
+    }
+}
+
+if(isset($_POST['submit']))
+{
+    check();
+}
+
+echo "<form action = 'index.php' method = 'post' style='background-color: #f2f2f2; border-radius: 5px; width: 200px'>";
+    echo "<input type = 'text' name = \"data\" style = 'margin: 8px 0' placeholder = 'տողի երկարությունը'><br>";
+    echo "Տողի մեջ ներառել";
+    echo "<select>";
+        echo "<option>Թվեր</option>";
+        echo "<option>Տառեր</option>";
+        echo "<option>Թվեր և Տառեր</option>";
+    echo "</select>";
+    echo "<input type = 'submit' value = 'Գեներացնել' name = 'submit'>";
+echo "</form>";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

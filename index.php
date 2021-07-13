@@ -352,16 +352,16 @@ abstract class Car
     public $year;
     public $box;
     public $engine;
-    public $maxspeed;
+    public $maxSpeed;
 
-    public function __construct($model, $color, $year, $box, $engine, $maxspeed)
+    public function __construct($model, $color, $year, $box, $engine, $maxSpeed)
     {
         $this->model = $model;
         $this->color = $color;
         $this->year = $year;
         $this->box = $box;
         $this->engine = $engine;
-        $this->maxspeed = $maxspeed;
+        $this->maxSpeed = $maxSpeed;
     }
 
     public function Info()
@@ -413,8 +413,9 @@ $tesla->BreakCar();
 */
 
 //2
-//I will continue at home
-/*
+
+//save select after submit not working
+
 $alphabets = array(array(), array());
 $numbers = array();
 
@@ -430,34 +431,75 @@ for($i = 'a' , $j = 'A';$i < 'z';$i ++, $j ++)
 array_push($alphabets[0], 'z');
 array_push($alphabets[1], 'Z');
 
-function check()
+function rowLength()
 {
     $len = (int) $_POST['data'];
     return $len;
 }
 
-function generate(){
-    $res = "";
-    for($i = 0;$i < check();$i ++){
-
+function generateNums($num)
+{
+    $seq = "";
+    for ($i = 0;$i < rowLength();$i ++)
+    {
+        $seq .= $num[rand(0,9)];
     }
+
+    return $seq;
 }
 
-if(isset($_POST['submit']))
+function generateLet($let)
 {
-    check();
+    $seq = "";
+    for ($i = 0;$i < rowLength();$i ++)
+    {
+        $seq .= $let[rand(0, 1)][rand(0, 25)];
+    }
+
+    return $seq;
+}
+
+function generate($num, $let)
+{
+    if(rowLength() == 2) {
+        $seq = "";
+        $seq .= $num[rand(0,9)];
+        $seq .= $let[rand(0,1)][rand(0,25)];
+        $seq = str_shuffle($seq);
+        return $seq;
+    }
+
+    $seq = generateLet($let);
+    $seq .= generateNums($num);
+    $seq = str_shuffle($seq);
+    $seq = substr($seq, 0, strlen($seq) / 2);
+
+    return $seq;
+}
+
+$submit = $_POST['submit'];
+$type = $_POST['type'];
+
+if(isset($submit))
+{
+    if($type == 'letters')
+        echo "<p>".generateLet($alphabets)."</p>";
+    elseif ($type == 'letAndNum')
+        echo "<p>".generate($numbers, $alphabets)."</p>";
+    elseif ($type == 'numbers')
+        echo "<p>".generateNums($numbers)."</p>";
 }
 
 echo "<form action = 'index.php' method = 'post' style='background-color: #f2f2f2; border-radius: 5px; width: 200px'>";
-    echo "<input type = 'text' name = \"data\" style = 'margin: 8px 0' placeholder = 'տողի երկարությունը'><br>";
+    echo "<input type = 'text' name = 'data' style = 'margin: 8px 0' placeholder = 'տողի երկարությունը'><br>";
     echo "Տողի մեջ ներառել";
-    echo "<select>";
-        echo "<option>Թվեր</option>";
-        echo "<option>Տառեր</option>";
-        echo "<option>Թվեր և Տառեր</option>";
+    echo "<select name = 'type'>";
+        echo "<option value = 'numbers'>Թվեր</option>";
+        echo "<option value = 'letters'>Տառեր</option>";
+        echo "<option value = 'letAndNum'>Թվեր և Տառեր</option>";
     echo "</select>";
     echo "<input type = 'submit' value = 'Գեներացնել' name = 'submit'>";
-echo "</form>";*/
+echo "</form>";
 
 
 

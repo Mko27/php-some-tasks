@@ -1,4 +1,8 @@
 <?php
+require('functions.php');
+include 'Tesla.php';
+include 'BMW.php';
+
 //phpinfo();
 
 //1
@@ -317,192 +321,77 @@ echo remCom($a);*/
 //////////////////////////////////////////////////
 /// ////////////////////////////////////////////////
 /// ///////////////////////////////////////////////
-//1
+//3rd task
 /*
-$arr = array();
-for($i = 0;$i < 25;$i ++)
-{
-    array_push($arr, rand(1, 100));
-}
-
-//print_r($arr);
-echo "<br>";
-
-$arr = array_unique($arr);
-rsort($arr);
-
-//print_r($arr);
-
-echo "<table border = '2' width='200px' style = 'border-collapse: collapse; text-align: center' >";
-
-for($i = 0;$i < count($arr);$i ++)
-{
-    $num = $i + 1;
-    echo "<tr><td>{$num}</td><td>{$arr[$i]}</td></tr>";
-}
-
-echo "</table>";
-*/
-//3
-/*
-abstract class Car
-{
-    public $model;
-    public $color;
-    public $year;
-    public $box;
-    public $engine;
-    public $maxSpeed;
-
-    public function __construct($model, $color, $year, $box, $engine, $maxSpeed)
-    {
-        $this->model = $model;
-        $this->color = $color;
-        $this->year = $year;
-        $this->box = $box;
-        $this->engine = $engine;
-        $this->maxSpeed = $maxSpeed;
-    }
-
-    public function Info()
-    {
-        echo "Model: {$this->model} <br> Color: {$this->color} <br> Year: {$this->year} <br> Box: {$this->box} <br> Engine: {$this->engine} <br> Max Speed: {$this->maxspeed} <br>";
-    }
-
-    abstract public function Start();
-    abstract public function BreakCar();
-}
-
-class BMW extends Car
-{
-    public function Start()
-    {
-        echo "Please unlock the key <br>";
-    }
-
-    public function BreakCar()
-    {
-        echo "Press breaks clamp <br>";
-    }
-}
-
-class Tesla extends Car
-{
-    public function Start()
-    {
-        echo "Please press the key <br>";
-    }
-
-    public function BreakCar()
-    {
-        echo "Press break key <br>";
-    }
-}
-
-$bmw = new BMW("E50", "Black", "2021", "Automat", "5.7L", 240);
-
-$bmw->Info();
+$bmw = new BMW('e50','red',2017,'auto','2.7l',200, 240);
+$tesla = new Tesla('e50','red',2017,'auto','2.7l',140,240);
 $bmw->Start();
-$bmw->BreakCar();
-
-$tesla = new Tesla("Tesla20", "Blue", "2020", "Automat", "1.2L", 220);
-
-$tesla->Info();
+$bmw->breakCar();
+$bmw->info();
+$bmw->addSpeed();
+$bmw->reduceSpeed();
 $tesla->Start();
-$tesla->BreakCar();
+$tesla->breakCar();
+$tesla->info();
+$tesla->addSpeed();
+$tesla->reduceSpeed();
 */
+?>
 
-//2
+<!-- 1st task -->
+<!--
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>1st Task</title>
+</head>
+<body>
+    <table border='2' width='200px' style='border-collapse: collapse; text-align: center' >
+        <?php foreach($arr as $key => $value):?>
+            <tr><td><?=$key + 1?></td><td><?=$value?></td></tr>
+        <?php endforeach;?>
+    </table>
+</body>
+</html>
+-->
 
-//save select after submit not working
+<!-- 2nd task -->
 
-$alphabets = array(array(), array());
-$numbers = array();
-
-for($i = 0;$i < 10;$i ++)
-    array_push($numbers, $i);
-
-for($i = 'a' , $j = 'A';$i < 'z';$i ++, $j ++)
-{
-    array_push($alphabets[0], $i);
-    array_push($alphabets[1], $j);
-}
-
-array_push($alphabets[0], 'z');
-array_push($alphabets[1], 'Z');
-
-function rowLength()
-{
-    $len = (int) $_POST['data'];
-    return $len;
-}
-
-function generateNums($num)
-{
-    $seq = "";
-    for ($i = 0;$i < rowLength();$i ++)
-    {
-        $seq .= $num[rand(0,9)];
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2nd Task</title>
+</head>
+<body>
+    <?php
+    if(isset($submit)) {
+        if ($type == 'letters')
+            echo "<p>" . generateLet($alphabets) . "</p>";
+        elseif ($type == 'letAndNum')
+            echo "<p>" . generate($numbers, $alphabets) . "</p>";
+        elseif ($type == 'numbers')
+            echo "<p>" . generateNums($numbers) . "</p>";
     }
-
-    return $seq;
-}
-
-function generateLet($let)
-{
-    $seq = "";
-    for ($i = 0;$i < rowLength();$i ++)
-    {
-        $seq .= $let[rand(0, 1)][rand(0, 25)];
-    }
-
-    return $seq;
-}
-
-function generate($num, $let)
-{
-    if(rowLength() == 2) {
-        $seq = "";
-        $seq .= $num[rand(0,9)];
-        $seq .= $let[rand(0,1)][rand(0,25)];
-        $seq = str_shuffle($seq);
-        return $seq;
-    }
-
-    $seq = generateLet($let);
-    $seq .= generateNums($num);
-    $seq = str_shuffle($seq);
-    $seq = substr($seq, 0, strlen($seq) / 2);
-
-    return $seq;
-}
-
-$submit = $_POST['submit'];
-$type = $_POST['type'];
-
-if(isset($submit))
-{
-    if($type == 'letters')
-        echo "<p>".generateLet($alphabets)."</p>";
-    elseif ($type == 'letAndNum')
-        echo "<p>".generate($numbers, $alphabets)."</p>";
-    elseif ($type == 'numbers')
-        echo "<p>".generateNums($numbers)."</p>";
-}
-
-echo "<form action = 'index.php' method = 'post' style='background-color: #f2f2f2; border-radius: 5px; width: 200px'>";
-    echo "<input type = 'text' name = 'data' style = 'margin: 8px 0' placeholder = 'տողի երկարությունը'><br>";
-    echo "Տողի մեջ ներառել";
-    echo "<select name = 'type'>";
-        echo "<option value = 'numbers'>Թվեր</option>";
-        echo "<option value = 'letters'>Տառեր</option>";
-        echo "<option value = 'letAndNum'>Թվեր և Տառեր</option>";
-    echo "</select>";
-    echo "<input type = 'submit' value = 'Գեներացնել' name = 'submit'>";
-echo "</form>";
-
-
-
+    ?>
+<form action='index.php' method='post' style='background-color: #f2f2f2; border-radius: 5px; width: 200px'>
+    <input type='text' name='data' style='margin: 8px 0' placeholder='տողի երկարությունը'>
+    <select name='type'>
+        <option value='numbers' <?php if (!(strcmp("numbers", $type))) {echo "selected=\"selected\"";} ?>>Թվեր</option>
+        <option value='letters' <?php if (!(strcmp("letters", $type))) {echo "selected=\"selected\"";} ?>>Տառեր</option>
+        <option value='letAndNum' <?php if (!(strcmp("letAndNum", $type))) {echo "selected=\"selected\"";} ?>>Թվեր և Տառեր</option>
+    </select>
+    <input type='submit' value='Գեներացնել' name='submit'>
+</form>
+</body>
+</html>
 
 
 
